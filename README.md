@@ -5,20 +5,33 @@ MN_name quick guide:
 IMPORTANT NOTE: For multiple masternodes on the SAME VPS instance, you MUST HAVE IPv6 enabled otherwise things won't work. For vultr it's a simple checkbox when creating a VPS instance but for digital ocean a little more work is required (see their IPv6 guide).
 
 Login to your VPS instance as root and run:
+
 git clone https://github.com/inertia182/vps.git && cd vps
+
 For ONE MN run: ./install.sh -p MN_name, for say, 4 MN, run: ./install.sh -p MN_name -c 4
+
 The MN_name source build should happen. It could take 15 minutes so be patient.
+
 When the build is done and the script finishes, check the console output and make sure there are no errors.
+
 Follow the guide at https://github.com/MN_name/MN_name_install/blob/master/MN_name_guide.txt to get your MN gen key ready.
+
 On the VPS again, run nano /etc/masternodes/MN_name_n1.conf and place your genkey after masternodeprivkey= as shown.
+
 Now you can activate the MN_name masternode(s) by running: /usr/local/bin/activate_masternodes_MN_name
+
 This will install the daemons as ubuntu services so you can stop/restart them easily any time by running: systemctl restart MN_name_n1 (where n1 is the MN number you want to restart)
+
 To interact with the MN_name cli, you must always specify the config file so e.g. to check the status of the masternode run: /usr/local/bin/MN_name-cli -conf=/etc/masternodes/MN_name_n1.conf masternode status
+
 Tips:
 
 the wallet and data are stored in /var/lib/masternodes/MN_nameN/ where n is the masternode number (1,2, 3...). You will find debug.log here.
+
 A 1GB Vultr instance (5 USD one) should be able to serve 5-6 masternodes without issue. Use the top command to monitor mem / cpu usage to judge.
+
 Want to add another masternode down the line? EZ PZ: ./install.sh -p MN_name -c 6 (assume you had 4 setup before).
+
 New coin update? Sure: ./install.sh -p MN_name -c 4 -u (remember to set number after -c to the number of nodes you have running).
 
 # Nodemaster
